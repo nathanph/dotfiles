@@ -45,11 +45,11 @@ set title              " Show filename in titlebar
 set showcmd            " Show what command I'm typing
 set scrolloff=3        " Show me where I'm going
 set wildmenu           " Autocomplete commands
-set tabstop=2          " Set the tabstop to 2 spaces
-set shiftwidth=2       " Shiftwidth should match tabstop
-set softtabstop=2      " backspace tabs
+set tabstop=4          " Set the tabstop to 4 spaces
+set shiftwidth=4       " Shiftwidth should match tabstop
+set softtabstop=4      " backspace tabs
 set expandtab          " Convert tabs to <tabstop> number of spaces
-set backspace=2        " makes backspace work like you expect
+set backspace=4        " makes backspace work like you expect
 set autoindent
 set smartindent
 set smarttab
@@ -104,7 +104,7 @@ command! Json %!python -m json.tool
 
 " Tab completion!
 function! SuperTab()
-  if (strpart(getline('.'),col('.')-2,1)=~'^\W\?$')
+  if (strpart(getline('.'),col('.')-4,1)=~'^\W\?$')
     return "\<Tab>"
   else
     return "\<C-n>"
