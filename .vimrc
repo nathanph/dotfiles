@@ -104,7 +104,7 @@ command! Json %!python -m json.tool
 
 " Tab completion!
 function! SuperTab()
-  if (strpart(getline('.'),col('.')-4,1)=~'^\W\?$')
+  if (strpart(getline('.'),col('.')-2,1)=~'^\W\?$')
     return "\<Tab>"
   else
     return "\<C-n>"
