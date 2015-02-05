@@ -65,12 +65,12 @@ set ttyfast
 set lazyredraw
 set clipboard=unnamed  " Copy/paste like normal
 
-set undodir=~/.vim/undo
+set undodir=./.undo,~/.vim/.undo//,.
 set undofile
 
-set backup                 " keep a backup file
-set backupdir=/private/tmp " put it here
-set dir=/private/tmp       " put swap files here
+set backup                                 " keep a backup file
+set backupdir=./.backup,~/.vim/.backup//,. " put it here
+set dir=./.swp,~/.vim/.swp//,.             " put swap files here
 
 " behave yourself
 nnoremap Y y$
