@@ -49,7 +49,7 @@ set tabstop=4          " Set the tabstop to 4 spaces
 set shiftwidth=4       " Shiftwidth should match tabstop
 set softtabstop=4      " backspace tabs
 set expandtab          " Convert tabs to <tabstop> number of spaces
-set backspace=4        " makes backspace work like you expect
+set backspace=2        " makes backspace work like you expect
 set autoindent
 set smartindent
 set smarttab
