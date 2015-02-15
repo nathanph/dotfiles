@@ -40,7 +40,6 @@ set encoding=utf-8
 
 set cursorline         " Highlight current line
 set number             " add line number for current line
-set relativenumber     " turns on relative line numbering
 set title              " Show filename in titlebar
 set showcmd            " Show what command I'm typing
 set scrolloff=3        " Show me where I'm going
@@ -65,8 +64,15 @@ set ttyfast
 set lazyredraw
 set clipboard=unnamed  " Copy/paste like normal
 
-set undodir=./.undo,~/.vim/.undo//,.
-set undofile
+if exists('+relativenumber')
+	set relativenumber     " turns on relative line numbering
+endif
+
+
+if has('persistent_undo')
+	set undodir=./.undo,~/.vim/.undo//,.
+	set undofile
+endif
 
 set backup                                 " keep a backup file
 set backupdir=./.backup,~/.vim/.backup//,. " put it here
