@@ -58,15 +58,19 @@ set smartindent
 set smarttab
 set formatoptions+=ro  " Insert leading comment characters on newline
 set showmatch          " Show matching [] () {} etc...
-set ignorecase
-set smartcase
-set incsearch
+set ignorecase	       " Do case insensitive matching
+set smartcase          " Do smart case matching
+set incsearch          " Incremental search
 set noeb               " No error bells
 set splitbelow
 set splitright
 set ttyfast
 set lazyredraw
 set clipboard=unnamed  " Copy/paste like normal
+set autowrite          " Automatically save before commands like :next and :make
+set hidden             " Hide buffers when they are abandoned
+set mouse=a            " Enable mouse usage (all modes)
+set background=dark
 
 if exists('+relativenumber')
 	set relativenumber     " turns on relative line numbering
