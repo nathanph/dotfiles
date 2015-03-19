@@ -77,13 +77,13 @@ endif
 
 
 if has('persistent_undo')
-	set undodir=./.undo,~/.vim/.undo//,.
+	set undodir=./.undo,~/.vim/undo//,.
 	set undofile
 endif
 
 set backup                                 " keep a backup file
-set backupdir=./.backup,~/.vim/.backup//,. " put it here
-set dir=./.swp,~/.vim/.swp//,.             " put swap files here
+set backupdir=./.backup,~/.vim/backup//,. " put it here
+set dir=./.swp,~/.vim/swp//,.             " put swap files here
 
 " behave yourself
 nnoremap Y y$
