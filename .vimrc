@@ -77,13 +77,23 @@ endif
 
 
 if has('persistent_undo')
-	set undodir=./.undo,~/.vim/undo//,.
+    if !isdirectory($HOME . "/.vim/undo")
+        call mkdir($HOME . "/.vim/undo", "p")
+    endif
 	set undofile
+	set undodir=./.undo,~/.vim/undo//,.
 endif
 
-set backup                                 " keep a backup file
+if !isdirectory($HOME . "/.vim/backup")
+    call mkdir($HOME . "/.vim/backup", "p")
+endif
+set backup
 set backupdir=./.backup,~/.vim/backup//,. " put it here
-set dir=./.swp,~/.vim/swp//,.             " put swap files here
+
+if !isdirectory($HOME . "/.vim/swp")
+    call mkdir($HOME . "/.vim/swp", "p")
+endif
+set directory=./.swp,~/.vim/swp//,.             " put swap files here
 
 " behave yourself
 nnoremap Y y$
