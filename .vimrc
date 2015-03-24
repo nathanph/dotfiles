@@ -23,6 +23,7 @@ Plugin 'adimit/prolog.vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'kongo2002/fsharp-vim'
 
 call vundle#end()
 filetype plugin indent on
