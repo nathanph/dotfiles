@@ -19,6 +19,7 @@ Plugin 'sickill/vim-monokai'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-git'
 Plugin 'adimit/prolog.vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'godlygeek/tabular'
@@ -31,17 +32,22 @@ filetype plugin indent on
 " For showing off .vimrc
 autocmd! bufwritepost .vimrc source %
 
+" Spell checking and text wrap for git commits
+" autocmd Filetype gitcommit spell textwidth=72
+
 let NERDTreeDirArrows=0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_theme='wombat'
 let g:airline_powerline_fonts=1
+let g:vim_markdown_folding_disabled=1
 set laststatus=2
 
 syntax enable
 colorscheme monokai
 set encoding=utf-8
 
+set spelllang=en
 set cursorline         " Highlight current line
 set number             " add line number for current line
 set title              " Show filename in titlebar
