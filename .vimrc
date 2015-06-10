@@ -1,4 +1,5 @@
 set nocompatible
+filetype on
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -24,7 +25,6 @@ Plugin 'adimit/prolog.vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'kongo2002/fsharp-vim'
 
 call vundle#end()
 filetype plugin indent on
