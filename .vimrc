@@ -35,6 +35,10 @@ autocmd! bufwritepost .vimrc source %
 " Spell checking and text wrap for git commits
 " autocmd Filetype gitcommit spell textwidth=72
 
+" Set Markdown files to enable spellchecking.
+autocmd FileType gitcommit setlocal spell
+set complete+=kspell
+
 let NERDTreeDirArrows=0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -82,6 +86,11 @@ if exists('+relativenumber')
 	set relativenumber     " turns on relative line numbering
 endif
 
+if exists('+colorcolumn')
+  set colorcolumn=81
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
 
 if has('persistent_undo')
     if !isdirectory($HOME . "/.vim/undo")
