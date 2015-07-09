@@ -45,7 +45,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vagrant bower brew bundler coffee compleat dircycle dirhistory docker encode64 fasd gem git gitfast git-extras git-flow history jsontools knifenpm node pyenv python sudo common-aliases vi-mode)
+plugins=(git vagrant bower brew bundler compleat dircycle dirhistory docker encode64 fasd gem git gitfast git-extras git-flow history jsontools knifenpm node pyenv python sudo common-aliases vi-mode)
 
 # User configuration
 
@@ -78,5 +78,21 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias pip=pip3
-alias python=python3
+# alias pip=pip3
+#alias python=python3
+
+source ~/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Load zsh-autosuggestions.
+source ~/.oh-my-zsh/plugins/zsh-autosuggestions/autosuggestions.zsh
+
+# Enable autosuggestions automatically.
+zle-line-init() {
+    zle autosuggest-start
+}
+zle -N zle-line-init
+
+# Accept suggestions without leaving insert mode
+bindkey '^f' vi-forward-word
+# or
+bindkey '^f' vi-forward-blank-word
