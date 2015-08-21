@@ -35,10 +35,13 @@ autocmd! bufwritepost .vimrc source %
 
 " Spell checking and text wrap for git commits
 " autocmd Filetype gitcommit spell textwidth=72
-
-" Set Markdown files to enable spellchecking.
+au BufRead,BufNewFile *.txt,*.tex set wrap linebreak nolist textwidth=0 wrapmargin=0
 autocmd FileType gitcommit setlocal spell
 set complete+=kspell
+
+" Spell checking and text wrap for markdown
+au BufRead,BufNewFile *.md,*.markdown setlocal wrap spell linebreak nolist textwidth=80 wrapmargin=0
+
 
 let NERDTreeDirArrows=0
 let g:airline_left_sep=''
@@ -186,3 +189,7 @@ nnoremap + <C-a>
 nnoremap - <C-x>
 
 let g:EclimCompletionMethod = 'omnifunc'
+
+
+" au BufNewFile,BufReadPost *.md set filetype=markdown
+let g:markdown_fenced_languages = ['python', 'coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html']
