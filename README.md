@@ -2,8 +2,8 @@
 
 ###Download and Move Necessary Files
 ```
-$ git clone https://github.com/alewitt/dotfiles ~/
-$ mv dotfiles/.vimrc dotfiles/.vimrc ~
+$ git clone https://github.com/<username>/dotfiles ~/
+$ mv dotfiles/.vimrc dotfiles/.vimrc ~/
 $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
 
