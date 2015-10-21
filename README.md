@@ -12,8 +12,7 @@ $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   * Mac `$ brew install vim --override-system-vi`
   * Ubuntu `$ apt-get install vim`
 2. Install Plugins
-  * `$ vim`
-  * :PluginInstall
+  * `$ vim +PluginInstall +qall`
 
 
 
