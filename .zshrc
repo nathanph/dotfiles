@@ -1,11 +1,11 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/nate/.oh-my-zsh
+export ZSH=/home/nate/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="amuse"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -45,7 +45,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vagrant bower brew bundler compleat dircycle dirhistory docker encode64 fasd gem git gitfast git-extras git-flow history jsontools knifenpm node pyenv python sudo common-aliases vi-mode)
+plugins=(git vagrant bower brew bundler compleat dircycle dirhistory docker encode64 fasd gem git gitfast git-extras git-flow history jsontools knifenpm node pyenv python sudo common-aliases vi-mode zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 
@@ -79,18 +79,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias pip=pip3
-#alias python=python3
-
-source ~/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Load zsh-autosuggestions.
-source ~/.oh-my-zsh/plugins/zsh-autosuggestions/autosuggestions.zsh
-
-# Enable autosuggestions automatically.
-zle-line-init() {
-    zle autosuggest-start
-}
-zle -N zle-line-init
+# alias python=python3
 
 # Accept suggestions without leaving insert mode
 bindkey '^f' vi-forward-word
