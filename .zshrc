@@ -45,7 +45,10 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vagrant bower brew bundler compleat dircycle dirhistory docker encode64 fasd gem git gitfast git-extras git-flow history jsontools knifenpm node pyenv python sudo common-aliases vi-mode zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git vagrant bower brew bundler compleat dircycle dirhistory docker encode64 fasd gem gitfast git-extras git-flow history jsontools knife npm node pyenv python sudo common-aliases vi-mode zsh-autosuggestions zsh-syntax-highlighting tmux)
+
+ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOCONNECT=false
 
 # User configuration
 
