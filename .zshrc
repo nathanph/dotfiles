@@ -49,10 +49,11 @@ plugins=(git vagrant bower brew bundler compleat dircycle dirhistory docker enco
 
 ZSH_TMUX_AUTOSTART=true
 ZSH_TMUX_AUTOCONNECT=false
+# ZSH_TMUX_AUTOQUIT=false
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -88,3 +89,15 @@ source $ZSH/oh-my-zsh.sh
 bindkey '^f' vi-forward-word
 # or
 bindkey '^f' vi-forward-blank-word
+
+if type "archey" > /dev/null; then
+    archey
+fi
+
+if type "python3" > /dev/null; then
+    alias python=python3
+fi
+
+if type "pip3" > /dev/null; then
+    alias pip=pip3
+fi
