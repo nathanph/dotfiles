@@ -1,0 +1,27 @@
+#!/bin/bash
+jupyter() {
+    volumes=''
+    # Check for a jupyter directory at every supplied path. If it exists, mount
+    # it, otherwise mount the directory.
+    for arg in "$@"
+    do
+        # TODO:: If jupyter folders are provided, mount using parent name instead.
+        link=$(readlink -f $arg)
+        if [[ -d $link/jupyter ]]; then
+            leaf=$(basename $link)
+            volumes+="-v $link/jupyter:/home/jovyan/work/$leaf "
+        else
+            parent=$(basename $(dirname $link))
+            volumes+="-v $link:/home/jovyan/work/$parent "
+        fi
+    done
+    # If current directory has a jupyter folder, mount that.
+    if [[ -d $PWD/jupyter ]]; then
+        leaf=$(basename $PWD)
+        volumes+="-v $PWD/jupyter:/home/jovyan/work "
+    fi
+    # TODO:: If there's no parameters, mount the current directory.
+    cmd="sudo docker run -d -p 8888:8888 -p 4040-4050:4040-4050 $volumes jupyter/all-spark-notebook start-notebook.sh --NotebookApp.notebook_dir=/home/jovyan/work; sudo docker rm $(sudo docker ps -a -q) &> /dev/null"
+    eval $cmd
+}
+alias jupyter=jupyter
