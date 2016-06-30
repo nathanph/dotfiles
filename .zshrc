@@ -54,6 +54,9 @@ ZSH_TMUX_AUTOCONNECT=false
 # User configuration
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/games"
+export PATH="$PATH:$HOME/.npm-packages/bin"
+export PATH="$PATH:/opt/devkitpro/devkitARM/bin/"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -90,7 +93,14 @@ bindkey '^f' vi-forward-word
 # or
 bindkey '^f' vi-forward-blank-word
 
-if type "archey" > /dev/null; then
+# Aliases
+alias ls='ls -h --color --group-directories-first'
+
+if type "archeyjs" > /dev/null; then
+    archeyjs
+elif type "screenfetch" > /dev/null; then
+    screenfetch
+elif type "archey" > /dev/null; then
     archey
 fi
 
@@ -100,4 +110,11 @@ fi
 
 if type "pip3" > /dev/null; then
     alias pip=pip3
+fi
+
+if type "vim" > /dev/null; then
+    alias vimrc='vim ~/.vimrc'
+    alias zshrc='vim ~/.zshrc'
+    alias tmuxconf='vim ~/.tmux.conf'
+    alias tmuxrc='vim ~/.tmux.conf'
 fi
