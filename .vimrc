@@ -40,10 +40,40 @@ Plugin 'mhinz/vim-startify'
 Plugin 'groenewege/vim-less'
 Plugin 'kien/ctrlp.vim'
 Plugin 'ap/vim-css-color'
+Plugin 'valloric/youcompleteme'
+Plugin 'yggdroot/indentline' " I favor this over Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'elzr/vim-json'
 " Plugin 'laurilehmijoki/haskellmode-vim'
 
 call vundle#end()
 filetype plugin indent on
+
+" Enable rainbow parentheses. Doesn't seem to work with vim-javascript.
+" let g:rbpt_colorpairs = [
+"     \ ['brown',       'RoyalBlue3'],
+"     \ ['Darkblue',    'SeaGreen3'],
+"     \ ['darkgray',    'DarkOrchid3'],
+"     \ ['darkgreen',   'firebrick3'],
+"     \ ['darkcyan',    'RoyalBlue3'],
+"     \ ['darkred',     'SeaGreen3'],
+"     \ ['darkmagenta', 'DarkOrchid3'],
+"     \ ['brown',       'firebrick3'],
+"     \ ['gray',        'RoyalBlue3'],
+"     \ ['black',       'SeaGreen3'],
+"     \ ['darkmagenta', 'DarkOrchid3'],
+"     \ ['Darkblue',    'firebrick3'],
+"     \ ['darkgreen',   'RoyalBlue3'],
+"     \ ['darkcyan',    'SeaGreen3'],
+"     \ ['darkred',     'DarkOrchid3'],
+"     \ ['red',         'firebrick3'],
+"     \ ]
+" let g:rbpt_max = 16
+" let g:rbpt_loadcmd_toggle = 1
+" au VimEnter * RainbowParenthesesToggle
+" au Syntax * RainbowParenthesesLoadRound
+" au Syntax * RainbowParenthesesLoadSquare
+" au Syntax * RainbowParenthesesLoadBraces
 
 " For showing off .vimrc
 autocmd! bufwritepost .vimrc source %
@@ -57,8 +87,19 @@ au BufRead,BufNewFile *.txt,*.tex set wrap linebreak nolist textwidth=0 wrapmarg
 autocmd FileType gitcommit setlocal spell
 set complete+=kspell
 
+
 " Spell checking and text wrap for markdown
 au BufRead,BufNewFile *.md,*.markdown setlocal wrap spell linebreak nolist textwidth=80 wrapmargin=0
+
+" Markdown - Don't conceal syntax.
+let g:vim_markdown_conceal = 0
+
+" Use JSON Plugin.
+au! BufRead,BufNewFile *.json set filetype=json
+let g:vim_json_syntax_conceal = 0
+
+" Don't ever clean syntax... WTF?
+set conceallevel=0
 
 " Spell checking and text wrap for LaTeX
 au BufRead,BufNewFile *.tex setlocal wrap spell linebreak nolist textwidth=80 wrapmargin=0
@@ -125,7 +166,9 @@ autocmd filetype nerdtree highlight go_icon ctermbg=none ctermfg=Red guifg=#ffa5
 " Fix enter in normal mode.
 autocmd CmdwinEnter * nnoremap <CR> <CR>
 autocmd BufReadPost quickfix nnoremap <CR> <CR>
-nnoremap <CR> o<Esc>
+
+" Make enter do things in normal mode.
+" nnoremap <CR> o<Esc>
 
 " Smash f and j together to escape.
 inoremap jf <Esc>
@@ -139,8 +182,11 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 syntax enable
 colorscheme monokai
-set encoding=utf-8
 
+" Change popup menu colors.
+" highlight Pmenu ctermfg=15 ctermbg=0 guifg=#ffffff guibg=#0000ff
+
+set encoding=utf-8
 set spelllang=en
 set cursorline         " Highlight current line
 set number             " add line number for current line
@@ -241,7 +287,7 @@ function! SuperTab()
 endfunction
 imap <Tab> <C-R>=SuperTab()<CR>
 
-" Strip trailing whitespace (\ss) (strip spaces)
+" Strip trailing whitespace (\ss) (strip spaces).
 function! StripWhitespace()
         let save_cursor = getpos(".")
         let old_query = getreg('/')
@@ -251,6 +297,7 @@ function! StripWhitespace()
 endfunction
 noremap <leader>ss :call StripWhitespace()<CR>
 
+" Highlight trailing whitespace.
 highlight WhitespaceEOL ctermbg=Red guibg=Red
 match WhitespaceEOL /\s\+$/
 
@@ -261,6 +308,9 @@ autocmd BufNewFile,BufRead *\.md set noexpandtab
 
 " Nerdtree
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
+
+" Tagbar
+map <Leader>t :TagbarToggle<CR>
 
 " Fugitive
 map <Leader>gb :Gblame<CR>
