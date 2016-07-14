@@ -94,6 +94,9 @@ au BufRead,BufNewFile *.md,*.markdown setlocal wrap spell linebreak nolist textw
 " Markdown - Don't conceal syntax.
 let g:vim_markdown_conceal = 0
 
+" Make esc occur faster.
+set timeoutlen=1000 ttimeoutlen=0
+
 " Use JSON Plugin.
 au! BufRead,BufNewFile *.json set filetype=json
 let g:vim_json_syntax_conceal = 0
@@ -170,9 +173,10 @@ autocmd BufReadPost quickfix nnoremap <CR> <CR>
 " Make enter do things in normal mode.
 " nnoremap <CR> o<Esc>
 
-" Smash f and j together to escape.
-inoremap jf <Esc>
-inoremap fj <Esc>
+" Smash f and j together to escape. (Bad because sometimes I like to smash
+" homerow keys while I'm thinking. =P
+" inoremap jf <Esc>
+" inoremap fj <Esc>
 
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
