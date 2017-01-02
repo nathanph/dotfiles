@@ -14,10 +14,10 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
-Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sickill/vim-monokai'
+Plugin 'rakr/vim-one'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fugitive'
@@ -33,8 +33,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'ryanoasis/vim-devicons'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'edkolev/tmuxline.vim' " Use this to modify my tmux airline theme.
 Plugin 'rstacruz/sparkup'
 Plugin 'mhinz/vim-startify'
 Plugin 'groenewege/vim-less'
@@ -44,10 +43,22 @@ Plugin 'valloric/youcompleteme'
 Plugin 'yggdroot/indentline' " I favor this over Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'elzr/vim-json'
+Plugin 'marcweber/vim-addon-local-vimrc'
+Plugin 'othree/javascript-libraries-syntax.vim'
+" Plugin 'pangloss/vim-javascript'
+Plugin 'isruslan/vim-es6'
+Plugin 'kien/rainbow_parentheses.vim'
 " Plugin 'laurilehmijoki/haskellmode-vim'
 
 call vundle#end()
+
 filetype plugin indent on
+
+" set encoding=utf-8
+
+
+" Enable local .vimrc.
+let g:local_vimrc = {'names':['.vimrc'],'hash_fun':'LVRHashOfFile'}
 
 " Enable rainbow parentheses. Doesn't seem to work with vim-javascript.
 " let g:rbpt_colorpairs = [
@@ -75,6 +86,10 @@ filetype plugin indent on
 " au Syntax * RainbowParenthesesLoadSquare
 " au Syntax * RainbowParenthesesLoadBraces
 
+" Set g:python3_host_prog to point Nvim to a specific Python 3 interpreter:
+let g:python3_host_prog = '/usr/bin/python3'
+" g:loaded_python3_provider
+
 " For showing off .vimrc
 autocmd! bufwritepost .vimrc source %
 
@@ -101,7 +116,7 @@ set timeoutlen=1000 ttimeoutlen=0
 au! BufRead,BufNewFile *.json set filetype=json
 let g:vim_json_syntax_conceal = 0
 
-" Don't ever clean syntax... WTF?
+" Don't ever conceal syntax... WTF?
 set conceallevel=0
 
 " Spell checking and text wrap for LaTeX
@@ -110,10 +125,9 @@ au BufRead,BufNewFile *.tex setlocal wrap spell linebreak nolist textwidth=80 wr
 " Underline content that matches a search.
 set hlsearch
 
+
 let NERDTreeDirArrows=1
-let g:airline_theme='molokai'
 let g:Powerline_symbols='fancy'
-let g:airline_powerline_fonts=1
 let g:vim_markdown_folding_disabled=1
 let g:webdevicons_conceal_nerdtree_brackets=1
 let g:WebDevIconsNerdTreeAfterGlyphPadding=' '
@@ -123,13 +137,24 @@ set laststatus=2
 " Tab settings for javascript files.
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=2 expandtab
 
+" Recommended Syntastic settings.
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " Feross's standard for JS.
-" let g:syntastic_javascript_checkers = ['standard']
+let g:syntastic_javascript_checkers = ['standard']
+let g:syntastic_javascript_standard_exec = 'semistandard'
 
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+    exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+    exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 
 autocmd VimEnter * call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
@@ -178,21 +203,43 @@ autocmd BufReadPost quickfix nnoremap <CR> <CR>
 " inoremap jf <Esc>
 " inoremap fj <Esc>
 
-" Enable the list of buffers
+" Tmuxline settings
+let g:airline#extensions#tmuxline#enabled = 0
+" let g:tmuxline_preset = 'zenburn'
+
+" Enable the list of buffers.
 let g:airline#extensions#tabline#enabled = 1
 
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
+" Auto populate g:airline_symbols with powerline symbols.
+let g:airline_powerline_fonts=1
+
+" Show just the filename.
+" let g:airline#extensions#tabline#fnamemod = ':t'
+
+if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+if (has("termguicolors"))
+    set termguicolors
+endif
 
 syntax enable
-colorscheme monokai
+set t_Co=256
+set background=dark " for the dark version
+" set background=light " for the light version
+" colorscheme monokai
+colorscheme one
+let g:one_allow_italics = 1 " I love italic for comments
+let g:airline_theme='one'
 
 " Change popup menu colors.
 " highlight Pmenu ctermfg=15 ctermbg=0 guifg=#ffffff guibg=#0000ff
 
-set encoding=utf-8
 set spelllang=en
-set cursorline         " Highlight current line
 set number             " add line number for current line
 set title              " Show filename in titlebar
 set showcmd            " Show what command I'm typing
@@ -220,14 +267,22 @@ set clipboard=unnamedplus  " Copy/paste like normal
 set autowrite          " Automatically save before commands like :next and :make
 set hidden             " Hide buffers when they are abandoned
 set mouse=a            " Enable mouse usage (all modes)
-set background=dark
 
+" Enable relative numbering because it's great!
 if exists('+relativenumber')
     set relativenumber     " turns on relative line numbering
 endif
 
+" Highlight current line
+if exists('+cursorline')
+    set cursorline
+    hi CursorLine ctermbg=red guibg=#32363E
+endif
+
+" Highlight the 81st column so we know not to let our code extend past it.
 if exists('+colorcolumn')
     set colorcolumn=81
+    hi ColorColumn ctermbg=red guibg=#32363E
 else
     au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
@@ -283,21 +338,21 @@ command! Json %!python -m json.tool
 
 " Tab completion!
 function! SuperTab()
-  if (strpart(getline('.'),col('.')-2,1)=~'^\W\?$')
-    return "\<Tab>"
-  else
-    return "\<C-n>"
-  endif
+    if (strpart(getline('.'),col('.')-2,1)=~'^\W\?$')
+        return "\<Tab>"
+    else
+        return "\<C-n>"
+    endif
 endfunction
 imap <Tab> <C-R>=SuperTab()<CR>
 
 " Strip trailing whitespace (\ss) (strip spaces).
 function! StripWhitespace()
-        let save_cursor = getpos(".")
-        let old_query = getreg('/')
-        :%s/\s\+$//e
-        call setpos('.', save_cursor)
-        call setreg('/', old_query)
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    :%s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
 endfunction
 noremap <leader>ss :call StripWhitespace()<CR>
 
@@ -339,5 +394,5 @@ if exists("g:loaded_webdevicons")
 endif
 
 " LaTeX Suite
- set grepprg=grep\ -nH\ $*
- let g:tex_flavor='latex'
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
